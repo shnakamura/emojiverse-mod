@@ -16,14 +16,8 @@ public sealed class EmojiSystem : ModSystem
         public static List<Emoji> Emojis { get; internal set; } = new();
     }
 
-    /// <summary>
-    ///     Represents a lookup that provides how many times an emoji with X name has already been added.
-    /// </summary>
     public static Dictionary<string, int> RepeatedNameLookup { get; private set; } = new();
 
-    /// <summary>
-    ///     Represents a collection of all the currently loaded emojis.
-    /// </summary>
     public static List<Emoji> Emojis { get; private set; } = new();
 
     public override void PostSetupContent() {
@@ -50,12 +44,6 @@ public sealed class EmojiSystem : ModSystem
         }
     }
 
-    /// <summary>
-    ///     Attempts to load and register all emojis from a mod, given a root directory for search.
-    /// </summary>
-    /// <param name="mod">The mod instance from which emojis will be unloaded.</param>
-    /// <param name="rootDirectory">The root directory for the search.</param>
-    /// <typeparam name="T">The type of the mod.</typeparam>
     public static void LoadEmojisFromMod<T>(T mod, string rootDirectory) where T : Mod {
         foreach (var file in mod.GetFileNames()) {
             if (!file.EndsWith(".rawimg") || !file.Contains(rootDirectory)) {
@@ -87,11 +75,6 @@ public sealed class EmojiSystem : ModSystem
         EmojiModData<T>.IsLoaded = true;
     }
 
-    /// <summary>
-    ///     Attempts to unload all emojis registered from a mod.
-    /// </summary>
-    /// <param name="mod">The mod instance from which emojis will be unloaded.</param>
-    /// <typeparam name="T">The type of the mod.</typeparam>
     public static void UnloadEmojisFromMod<T>(T mod) where T : Mod {
         if (!EmojiModData<T>.IsLoaded) {
             return;
@@ -107,12 +90,6 @@ public sealed class EmojiSystem : ModSystem
         EmojiModData<T>.IsLoaded = false;
     }
 
-    /// <summary>
-    ///     Attempts to retrieve an emoji instance from a given identity.
-    /// </summary>
-    /// <param name="id">The identity search parameter.</param>
-    /// <param name="emoji">The emoji found.</param>
-    /// <returns>Whether an emoji with the identity specified exists or not.</returns>
     public static bool TryGetEmoji(string id, out Emoji emoji) {
         foreach (var iterator in Emojis) {
             if (iterator.Id == id) {

@@ -9,13 +9,15 @@ namespace Emojiverse.Common;
 
 internal sealed class EmojiChatSystem : ModSystem
 {
-    public static readonly string[] Tags = {
+    public static readonly string[] Tags = [
         "e",
         "emoji",
         "emote"
-    };
+    ];
 
     public override void Load() {
+        base.Load();
+
         ChatManager.Register<EmojiTagHandler>(Tags);
 
         IL_Main.DoUpdate_HandleChat += HandleChatPatch;
@@ -25,6 +27,8 @@ internal sealed class EmojiChatSystem : ModSystem
     }
 
     public override void Unload() {
+        base.Unload();
+
         ChatManagerUtils.Unregister(Tags);
     }
 
@@ -39,7 +43,7 @@ internal sealed class EmojiChatSystem : ModSystem
 
         var label = c.DefineLabel();
 
-        c.EmitDelegate(() => UIEmojiSuggestionSystem.SuggestionInterface?.CurrentState is UIEmojiSuggestion state && state.EmojiSuggestions?.Count > 0);
+        c.EmitDelegate(static () => UIEmojiSuggestionSystem.SuggestionInterface.CurrentState is UIEmojiSuggestion state && state.EmojiSuggestions.Count > 0);
 
         c.Emit(OpCodes.Brfalse, label);
         c.Emit(OpCodes.Ret);
