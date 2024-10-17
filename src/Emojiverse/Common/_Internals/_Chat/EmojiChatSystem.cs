@@ -33,7 +33,8 @@ internal sealed class EmojiChatSystem : ModSystem
     }
 
     private static void HandleChatPatch(ILContext il) {
-        var c = new ILCursor(il);
+		/*
+		var c = new ILCursor(il);
 
         if (!c.TryGotoNext(i => i.MatchLdstr(string.Empty))) {
             return;
@@ -43,24 +44,25 @@ internal sealed class EmojiChatSystem : ModSystem
 
         var label = c.DefineLabel();
 
-        c.EmitDelegate(static () => UIEmojiSuggestionSystem.SuggestionInterface.CurrentState is UIEmojiSuggestion state && state.EmojiSuggestions.Count > 0);
+        c.EmitDelegate(
+            static () => UIEmojiSuggestionSystem.SuggestionInterface.CurrentState is UIEmojiSuggestion state && state.EmojiSuggestions.Count > 0
+        );
 
         c.Emit(OpCodes.Brfalse, label);
         c.Emit(OpCodes.Ret);
         c.Emit(OpCodes.Nop);
 
         c.MarkLabel(label);
+		 */
     }
 
     private static void OpenPlayerChatHook(On_Main.orig_OpenPlayerChat orig) {
         orig();
 
-        UIEmojiSuggestionSystem.Enable();
     }
 
     private static void ClosePlayerChatHook(On_Main.orig_ClosePlayerChat orig) {
         orig();
 
-        UIEmojiSuggestionSystem.Disable();
     }
 }

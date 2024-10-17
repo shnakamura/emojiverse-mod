@@ -22,6 +22,7 @@ public static class ChatManagerUtils
             return;
         }
 
+
         foreach (var name in names) {
             dictionary.Remove(name);
         }

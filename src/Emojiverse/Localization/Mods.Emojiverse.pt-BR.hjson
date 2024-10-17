@@ -1,0 +1,13 @@
+Messages.Undetected: Nenhum pack de emojis foi detectado. Se isso não foi proposital, verifique seus pacotes de recursos ativados.
+
+Configs: {
+    EmojiverseConfig: {
+        DisplayName: Configuração de Emojis
+        Headers.Chat: Chat
+
+        EmojiDrawingScale: {
+            Label: Tamanho de Renderização de Emojis
+            Tooltip: Ajusta o tamanho no qual emojis são renderizados no chat.
+        }
+    }
+}
